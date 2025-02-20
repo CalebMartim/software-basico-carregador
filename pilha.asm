@@ -1,15 +1,19 @@
-section .text
+segment .text
     global add_numbers
+    global verifica_disponivel
+    
+verifica_disponivel:
+    enter 0,0
+    
+    
 
-add_numbers:
-    push rdi
-    push rsi
-  
-    mov eax, [rsp]  ; Get first argument (a)
-    add eax, [rsp+8]  ; Get second argument (b)
-
-    pop rdi
-    pop rsi
-
+    leave 
     ret
+add_numbers:
+    enter 0,0
 
+    mov eax, [ebp + 8]
+    add eax, [ebp + 12]
+
+    leave
+    ret
