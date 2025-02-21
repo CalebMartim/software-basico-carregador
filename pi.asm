@@ -1,5 +1,5 @@
 section .data
-    endl db 0ah, 0 ; '\n\0'
+    espaco db ' ', 0 ; '\n\0'
     aux db '0' 
     szaux equ $ - aux
 
@@ -14,6 +14,8 @@ print_int:
     push edi
     push ecx
     push ebx
+    push eax
+    push edx
 
     ; Começa conversão de int para string:
     mov edi, num + 11           ; Endereço do fim da string
@@ -45,13 +47,15 @@ print_int:
     mov ebx, 1                  
     int 0x80                    
 
-    ; Quebra de linha:
+    ; Mostra espaço:
     mov eax, 4
     mov ebx, 1
-    mov ecx, endl
+    mov ecx, espaco
     mov edx, 1
     int 0x80  
 
+    pop edx
+    pop eax
     pop ebx 
     pop ecx
     pop edi
